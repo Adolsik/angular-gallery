@@ -1,0 +1,53 @@
+<!-- ----------------------------------------------------------------------------------------- -->
+<!-- Gallery -->
+<div id="main" *ngIf="!showImage">
+  <div id="header">
+    <h1>Galeria Zdjęć</h1>
+    <hr>
+</div>
+
+  <div id="imagesBlock" *ngIf="selectedCategory==0">
+    <div id="images" *ngFor="let item of items let i = index" >
+      <img [src]="item.source" *ngIf="i < recentPage * imagesPerPage && i >= previousPage * imagesPerPage" (click)="ImageClicked($event, item.details)">
+    </div>
+  </div>
+  <div id="imagesBlock" *ngIf="selectedCategory==1">
+    <div id="images" *ngFor="let item of items1 let i = index" >
+      <img [src]="item.source" *ngIf="i < recentPage * imagesPerPage && i >= previousPage * imagesPerPage" (click)="ImageClicked($event, item.details)">
+    </div>
+  </div>
+  <div id="imagesBlock" *ngIf="selectedCategory==2">
+    <div id="images" *ngFor="let item of items2 let i = index" >
+      <img [src]="item.source" *ngIf="i < recentPage * imagesPerPage && i >= previousPage * imagesPerPage" (click)="ImageClicked($event, item.details)">
+    </div>
+  </div>
+  <div id="divButtons">
+    <button type="button" id="left" (click)="ButtonLeft()" class="button"><--</button>
+    <label id="pagination">{{pagination}} </label>
+    <button type="button" id="right" (click)="ButtonRight()" class="button">--></button>
+  </div>
+  <label id="categoryLabel" for="category">Kategoria</label>
+  <div id="category">
+    <select name="category" id="selectCategory" (change)="CategorySelect($event)">
+      <option id="all" value="0" selected>Wszystko</option>
+      <option value="1">Karabin</option>
+      <option value="2">Rewolwer</option>
+    </select>
+  </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------- -->
+<!-- Image full size -->
+<div *ngIf="showImage" id="items">
+  <div id="divImageFullSize">
+    <img id="imageFullSize" [src]="mainImageSource">
+  </div>
+  <div id="hide">
+    <input type="checkbox" (change)="HideDetails()">Schowaj opis
+  </div>
+  <div id="details" *ngIf="!hide">
+    <p id="detail">{{mainImageDetail}}</p>
+  </div>
+  <div id="divButtonBack">
+    <button type="button" id="buttonBack" (click)="BackToMain()">Wróć</button>
+  </div>
+</div>
